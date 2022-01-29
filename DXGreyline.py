@@ -36,6 +36,7 @@ try:
 except:
     exit()
 
+'''
 if (page != ''):
     img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
     filename = 'original.jpg' #local name to be saved
@@ -52,6 +53,17 @@ if (page != ''):
 
     #img.save('greyline.jpg', img.format)
     fd_img.close()
+'''
+
+if (page != ''):
+    img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
+    filename = 'original.jpg' #local name to be saved
+    r = http.request('GET', img_url[0], timeout=2)
+    
+    img = resizeimage.resize_cover(r.data, [320, 160])
+
+    print('Content-Type: application/html\n\n')
+    print(img)
 
 # End properly
 
