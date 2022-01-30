@@ -59,9 +59,9 @@ if (page != ''):
     img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
     r = http.request('GET', img_url[0], timeout=2)
     img = Image.open(BytesIO(r.data))
-    img.resize((320, 160), Image.ANTIALIAS)
+    img = img.resize((320, 160), Image.ANTIALIAS)
 
-    print('Content-Type: image/jpg\n\n')
+    print('Content-Type: image/jpeg\n\n')
     print(img)
 
 # End properly
