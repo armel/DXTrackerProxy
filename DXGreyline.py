@@ -10,6 +10,7 @@ import cgi
 import sys
 import urllib3
 import re
+import requests
 from io import StringIO
 from io import BytesIO
 from PIL import Image
@@ -36,6 +37,7 @@ try:
 except:
     exit()
 
+'''
 if (page != ''):
     img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
     filename = '/tmp/original.jpg' #local name to be saved
@@ -52,17 +54,15 @@ if (page != ''):
 
     #img.save('greyline.jpg', img.format)
     fd_img.close()
-
 '''
+
 if (page != ''):
     img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
-    r = http.request('GET', img_url[0], timeout=2)
-    img = Image.open(BytesIO(r.data))
-    img = img.resize((320, 160), Image.ANTIALIAS)
 
-    print('Content-Type: image/jpeg\n\n')
-    print(img)
-'''
+    response = requests.get(img_url[0])
+    in_memory_file = io.BytesIO(response.content)
+    im = Image.open(in_memory_file)
+    im.show()
 
 # End properly
 
