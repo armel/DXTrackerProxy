@@ -38,12 +38,12 @@ except:
 
 if (page != ''):
     img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
-    filename = 'original.jpg' #local name to be saved
+    filename = '/tmp/original.jpg' #local name to be saved
     with open(filename, 'wb') as f:
         r = http.request('GET', img_url[0], timeout=2)
         f.write(r.data)
 
-    fd_img = open('original.jpg', 'rb')
+    fd_img = open('/tmp/original.jpg', 'rb')
     img = Image.open(fd_img)
     img = resizeimage.resize_cover(img, [320, 160])
 
