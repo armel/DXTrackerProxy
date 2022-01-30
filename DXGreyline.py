@@ -10,8 +10,8 @@ import cgi
 import sys
 import urllib3
 import re
-import json
-import datetime
+from io import StringIO
+from io import BytesIO
 from PIL import Image
 from resizeimage import resizeimage
 
@@ -57,12 +57,11 @@ if (page != ''):
 
 if (page != ''):
     img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
-    filename = 'original.jpg' #local name to be saved
     r = http.request('GET', img_url[0], timeout=2)
-    
-    img = resizeimage.resize_cover(r.data, [320, 160])
+    img = Image.open(BytesIO(r.data))
+    img.resize((320, 160), Image.ANTIALIAS)
 
-    print('Content-Type: application/html\n\n')
+    print('Content-Type: image/jpg\n\n')
     print(img)
 
 # End properly
