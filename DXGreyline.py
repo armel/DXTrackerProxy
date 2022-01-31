@@ -51,7 +51,6 @@ if (page != ''):
     img.save(img_outut, img.format)
     
     fd_img.close()
-'''
 
 # End properly
 
