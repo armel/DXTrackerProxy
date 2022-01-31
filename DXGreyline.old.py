@@ -39,25 +39,19 @@ except:
 
 if (page != ''):
     img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
-    filename = '/var/www/html/original.jpg' #local name to be saved
-    img = requests.get(img_url[0])
-    img = io.BytesIO(img.content)
-    img = Image.open(img)
+    img_input = '/tmp/greyline.jpg'
+    img_ouput = '/var/www/html/greyline.jpg'
+
+    with open(img_input, 'wb') as f:
+        r = http.request('GET', img_url[0], timeout=2)
+        f.write(r.data)
+
+    tmp = open(img_input, 'rb')
+    img = Image.open(tmp)
+    tmp.close()
+
     img = resizeimage.resize_cover(img, [320, 160])
-    img.save(filename, img.format)
-
-
-
-'''
-if (page != ''):
-    img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
-
-    response = requests.get(img_url[0])
-    in_memory_file = io.BytesIO(response.content)
-    im = Image.open(in_memory_file)
-    img = resizeimage.resize_cover(img, [320, 160])
-    #img.save('/tmp/greyline.jpg', img.format)
-'''
+    img.save(img_output, img.format)
 
 # End properly
 
