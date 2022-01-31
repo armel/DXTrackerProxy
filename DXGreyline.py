@@ -11,8 +11,6 @@ import sys
 import urllib3
 import re
 import requests
-from io import StringIO
-from io import BytesIO
 from PIL import Image
 from resizeimage import resizeimage
 
@@ -39,24 +37,20 @@ except:
 
 if (page != ''):
     img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
-    filename = '/var/www/html/original.jpg' #local name to be saved
-    img = requests.get(img_url[0])
-    img = io.BytesIO(img.content)
-    img = Image.open(img)
+    img_input = '/tmp/original.jpg'
+    img_outut = '/var/www/html/greyline.jpg'
+
+    with open(img_input, 'wb') as f:
+        r = http.request('GET', img_url[0], timeout=2)
+        f.write(r.data)
+
+    fd_img = open(img_input, 'rb')
+    
+    img = Image.open(fd_img)
     img = resizeimage.resize_cover(img, [320, 160])
-    img.save(filename, img.format)
-
-
-
-'''
-if (page != ''):
-    img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
-
-    response = requests.get(img_url[0])
-    in_memory_file = io.BytesIO(response.content)
-    im = Image.open(in_memory_file)
-    img = resizeimage.resize_cover(img, [320, 160])
-    #img.save('/tmp/greyline.jpg', img.format)
+    img.save(img_outut, img.format)
+    
+    fd_img.close()
 '''
 
 # End properly
