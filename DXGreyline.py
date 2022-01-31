@@ -37,32 +37,31 @@ try:
 except:
     exit()
 
-'''
 if (page != ''):
     img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
     filename = '/tmp/original.jpg' #local name to be saved
     with open(filename, 'wb') as f:
         r = http.request('GET', img_url[0], timeout=2)
         f.write(r.data)
-
     fd_img = open('/tmp/original.jpg', 'rb')
     img = Image.open(fd_img)
     img = resizeimage.resize_cover(img, [320, 160])
-
-    print('Content-Type: image/jpeg\n\n')
-    print(img)
-
-    #img.save('greyline.jpg', img.format)
+    img.save('/tmp/greyline.jpg', img.format)
     fd_img.close()
-'''
 
+    sys.stdout.write( "Content-type: image/jpeg\r\n\r\n" + file('/tmp/greyline','rb').read() )
+
+
+'''
 if (page != ''):
     img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
 
     response = requests.get(img_url[0])
     in_memory_file = io.BytesIO(response.content)
     im = Image.open(in_memory_file)
-    im.show()
+    img = resizeimage.resize_cover(img, [320, 160])
+    #img.save('/tmp/greyline.jpg', img.format)
+'''
 
 # End properly
 
