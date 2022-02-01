@@ -41,7 +41,7 @@ if (page != ''):
     img_outut = '/var/www/html/sunmap.jpg'
 
     with open(img_input, 'wb') as f:
-        r = http.request('GET', img_url[0], timeout=2)
+        r = http.request('GET', img_url, timeout=2)
         f.write(r.data)
 
     fd_img = open(img_input, 'rb')
