@@ -18,9 +18,9 @@ from resizeimage import resizeimage
 version = '0.0.1'   # Version
 
 # Settings
-img_url = 'https://www.timeanddate.com/scripts/sunmap.php'
-img_input = '/tmp/sunmap_original.jpg'
-img_outut = '/var/www/html/sunmap.jpg'
+img_url = 'https://www.timeanddate.com/scripts/sunmap.php?iso=&earth=1'
+img_input = '/tmp/earth_original.jpg'
+img_outut = '/var/www/html/earth.jpg'
 
 urllib3.disable_warnings()
 http = urllib3.PoolManager(timeout=1.0)
