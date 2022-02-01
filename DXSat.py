@@ -22,7 +22,7 @@ url = 'https://heavens-above.com/AmateurSats.aspx?alt=0&tz=CET'
 # Limit
 limit = 10
 
-print('Content-Type: application/html\n\n')
+print('Content-Type: text/html\n')
 
 try:
     arg = cgi.FieldStorage()
@@ -83,7 +83,7 @@ if (page != ''):
             if indice == limit:
                 break
         sat.append({'Incoming': tmp[:-4]})
-        print(json.dumps(sat))
+        print(json.dumps(sat), end='')
 
 # End properly
 
