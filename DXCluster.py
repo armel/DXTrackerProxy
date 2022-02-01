@@ -19,7 +19,7 @@ version = '0.0.1'   # Version
 # Settings
 url = 'https://www.hamqth.com/dxc_csv.php?limit=50'
 
-print('Content-Type: application/html\n\n')
+print('Content-Type: text/html\n\n')
 
 urllib3.disable_warnings()
 http = urllib3.PoolManager(timeout=1.0)
