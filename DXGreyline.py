@@ -38,7 +38,7 @@ except:
 if (page != ''):
     img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
     img_input = '/tmp/greyline_original.jpg'
-    img_outut = '/var/www/html/greyline.jpg'
+    img_outut = '/var/www/html/greyline.png'
 
     with open(img_input, 'wb') as f:
         r = http.request('GET', img_url[0], timeout=2)
