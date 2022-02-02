@@ -48,7 +48,7 @@ if (page != ''):
     
     img = Image.open(fd_img)
     img = resizeimage.resize_cover(img, [320, 160])
-    img.save(img_output, img.format)
+    img.save(img_output, format = img.format, quality = 20, optimize = True)
     
     fd_img.close()
 
