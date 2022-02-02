@@ -20,7 +20,7 @@ version = '0.0.1'   # Version
 # Settings
 img_url = 'https://www.timeanddate.com/scripts/sunmap.php?iso=&earth=1'
 img_input = '/tmp/earth_original.jpg'
-img_outut = '/var/www/html/earth.jpg'
+img_output = '/var/www/html/earth.jpg'
 
 urllib3.disable_warnings()
 http = urllib3.PoolManager(timeout=1.0)
@@ -41,7 +41,7 @@ fd_img = open(img_input, 'rb')
 
 img = Image.open(fd_img)
 img = resizeimage.resize_cover(img, [320, 160])
-img.save(img_outut, img.format)
+img.save(img_output, img.format)
 
 fd_img.close()
 

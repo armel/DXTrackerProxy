@@ -38,7 +38,7 @@ except:
 if (page != ''):
     img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
     img_input = '/tmp/greyline_original.jpg'
-    img_outut = '/var/www/html/greyline.jpg'
+    img_output = '/var/www/html/greyline.jpg'
 
     with open(img_input, 'wb') as f:
         r = http.request('GET', img_url[0], timeout=2)
@@ -48,7 +48,7 @@ if (page != ''):
     
     img = Image.open(fd_img)
     img = resizeimage.resize_cover(img, [320, 160])
-    img.save(img_outut, img.format)
+    img.save(img_output, img.format)
     
     fd_img.close()
 
