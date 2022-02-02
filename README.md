@@ -17,12 +17,12 @@ git clone https://github.com/armel/DXTrackerProxy.git
 */2 * * * * /opt/DXTrackerProxy/DXSunmap.py
 ```
 
-> Les images générées sont dispos dans `/var/www/html/`
+> Les images générées sont dispos dans `/var/www/html/
 
 > Le script `DXEarth.py` produit une carte de qualité moyenne. Je ne l'ai pas donc activé, mais il est fonctionnel.
 
 ## Sat et Cluster
 
-Copier `DXSat.py` et `DXCluster.py` dans le `/var/www/RRFBlockIP/back/`
+Copier `DXSat.py` et `DXCluster.py` dans `/var/www/RRFBlockIP/back/`
 
 That's all.
