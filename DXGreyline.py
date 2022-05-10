@@ -56,8 +56,7 @@ if (page != ''):
     fd_img = open(img_input, 'rb')
 
     img = Image.open(fd_img)
-    img = resizeimage.resize_cover(img, [1024, 512])
-    img.save(img_output_big, format = img.format, quality = 70, optimize = True)
+    img = image.resize([1024, 512], Image.BICUBIC).save(img_output_big, image.format)
 
     fd_img.close()
 
