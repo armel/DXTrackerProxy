@@ -15,7 +15,7 @@ from PIL import Image
 from resizeimage import resizeimage
 
 # Version
-version = '0.0.1'   # Version
+version = '0.0.2'   # Version
 
 # Settings
 url = 'https://dx.qsl.net/propagation/greyline.html'
@@ -39,6 +39,7 @@ if (page != ''):
     img_url = re.findall(r"<img src=\"(.*?)\"", page, re.M|re.I|re.S)
     img_input = '/tmp/greyline_original.jpg'
     img_output = '/var/www/html/greyline.jpg'
+    img_output_big = '/var/www/html/greylinebig.jpg'
 
     with open(img_input, 'wb') as f:
         r = http.request('GET', img_url[0], timeout=2)
@@ -50,6 +51,14 @@ if (page != ''):
     img = resizeimage.resize_cover(img, [320, 160])
     img.save(img_output, format = img.format, quality = 70, optimize = True)
     
+    fd_img.close()
+
+    fd_img = open(img_input, 'rb')
+
+    img = Image.open(fd_img)
+    img = resizeimage.resize_cover(img, [1024, 512])
+    img.save(img_output_big, format = img.format, quality = 70, optimize = True)
+
     fd_img.close()
 
 # End properly
