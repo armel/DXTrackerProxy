@@ -50,7 +50,7 @@ fd_img = open(img_input, 'rb')
 
 img = Image.open(fd_img)
 img = resizeimage.resize_cover(img, [1024, 512])
-img.save(img_output_big, format = img.format, quality = 70, optimize = True)
+img.save(img_output_big, format = img.format, quality = 40, optimize = True)
 
 fd_img.close()
 
