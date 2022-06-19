@@ -51,7 +51,7 @@ try:
 except:
     exit()
 
-indice = 0
+indice = -5
 
 if (page != ''):
     if(format == 'json'):
@@ -61,7 +61,8 @@ if (page != ''):
         for l in line:
             element = re.findall(r">(.*?)</td>", l, re.M|re.I|re.S)
             name = re.findall(r">(.*?)</a>", element[0], re.M|re.I|re.S)
-            sat.append({'Name': name[0], 'Date': element[1], 'Debut': element[2], 'Altitude': element[3].replace("\u00b0", "°"), 'Azimut': element[4].replace("\u00b0", "°"), 'Fin': element[5], 'Frequence': element[6]})
+            if(indice >= 0):
+                sat.append({'Name': name[0], 'Date': element[1], 'Debut': element[2], 'Altitude': element[3].replace("\u00b0", "°"), 'Azimut': element[4].replace("\u00b0", "°"), 'Fin': element[5], 'Frequence': element[6]})
             indice += 1
             if indice == limit:
                 break
@@ -74,11 +75,12 @@ if (page != ''):
         for l in line:
             element = re.findall(r">(.*?)</td>", l, re.M|re.I|re.S)
             name = re.findall(r">(.*?)</a>", element[0], re.M|re.I|re.S)
-            tmp += name[0] + ' - ' + element[2] + ' - ' + element[5] + ' - Alt ' + element[3].replace("\u00b0", "") + ' - Az ' + element[4].replace("\u00b0", "")
-            if(element[6] != '.' and element[6] != ''):
-                 tmp += ' - ' + element[6].strip() + ' MHz -- '
-            else:
-                 tmp += ' -- '
+            if(indice >= 0):
+                tmp += name[0] + ' - ' + element[2] + ' - ' + element[5] + ' - Alt ' + element[3].replace("\u00b0", "") + ' - Az ' + element[4].replace("\u00b0", "")
+                if(element[6] != '.' and element[6] != ''):
+                     tmp += ' - ' + element[6].strip() + ' MHz -- '
+                else:
+                     tmp += ' -- '
             indice += 1
             if indice == limit:
                 break
